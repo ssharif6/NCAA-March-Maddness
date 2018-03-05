@@ -13,6 +13,7 @@ mm_predictor.init()
 # Load data
 season_data = pd.read_csv('./ncaa-data/RegularSeasonDetailedResults.csv')
 tourney_data = pd.read_csv('./ncaa-data/NCAATourneyDetailedResults.csv')
+tourney_data = tourney_data[tourney_data.Season != 2017]
 
 aggregated_data = pd.concat([season_data, tourney_data])
 
