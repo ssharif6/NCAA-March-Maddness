@@ -151,3 +151,25 @@ def analyze_teams(agg_data):
         TEAM_ELOS[game['Season']][game['WTeamID']] = new_winner_elo 
         TEAM_ELOS[game['Season']][game['LTeamID']] = new_loser_elo 
     return stat_features, y
+
+def predict_winner(team_1, team_2, model, season, stat_fields):
+    features = []
+
+    # Team 1
+    features.append(get_elo(season, team_1))
+    for stat in stat_fields:
+        features.append(get_stat(season, team_1, stat))
+
+    # Team 2
+    features.append(get_elo(season, team_2))
+    for stat in stat_fields:
+        features.append(get_stat(season, team_2, stat))
+
+    return model.predict_proba([features])
+
+def get_stat(season, team, field):
+    try:
+        l = team_stats[season][team][field]
+        return sum(l) / float(len(l))
+    except:
+        return 0
