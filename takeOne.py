@@ -25,9 +25,9 @@ print("Fitting on " + str(len(X)) + " samples")
 # TODO Use TPOT or xgboost
 # model = XGBClassifier()
 # model = linear_model.LogisticRegression()
-tpot = TPOTClassifier(generations = 50, max_time_mins=633, verbosity=2, scoring = 'neg_log_loss', population_size=20)
+tpot = TPOTClassifier(generations = 100, max_time_mins=780, verbosity=2, scoring = 'neg_log_loss', population_size=30)
 tpot.fit(np.array(X), np.array(Y))
-tpot.export('tpot_firstTry_pipeline.py')
+tpot.export('tpot_secondTry_pipeline.py')
 # Use Gridsearch here
 
 
