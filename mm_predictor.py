@@ -76,7 +76,7 @@ def update_stats(season, team, fields):
 
 def analyze_teams(agg_data):
     'Calculates elo for each game and each season via in-game stat analysis'
-    stat_features = []
+    stat_features = [] # X
     y = []
     # Iterate through each row
     for i, game in agg_data.iterrows():
