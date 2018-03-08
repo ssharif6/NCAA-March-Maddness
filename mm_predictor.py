@@ -288,18 +288,40 @@ def analyze_teams(agg_data):
     return stat_features, y
 
 def predict_winner(team_1, team_2, model, season, sf):
-    features = []
-    for stat in sf:
-        features.append(get_stat(season, team_1, stat) - get_stat(season, team_2, stat))
-
-    features.append(get_elo(season, team_1)-get_elo(season, team_2))
-    # Team 2
-
+    # features = []
     # for stat in sf:
-    #     features.append(get_stat(season, team_2, stat))
-    # features.append(get_elo(season, team_2))
+    #     features.append(get_stat(season, team_1, stat) - get_stat(season, team_2, stat))
+    #
+    # features.append(get_elo(season, team_1)-get_elo(season, team_2))
+    # # Team 2
+    #
+    # # for stat in sf:
+    # #     features.append(get_stat(season, team_2, stat))
+    # # features.append(get_elo(season, team_2))
+    features = []
+
+    # Team 1
+    features.append(get_elo(season, team_1))
+    for stat in stat_fields:
+        features.append(get_stat(season, team_1, stat))
+
+    # Team 2
+    features.append(get_elo(season, team_2))
+    for stat in stat_fields:
+        features.append(get_stat(season, team_2, stat))
 
     return model.predict_proba([features])
+
+    # features = []
+    # t1 = [(get_elo(season, team_1))]
+    # t2 = [(get_elo(season, team_2))]
+    # for stat in sf:
+    #     t1.append(get_stat(season, team_1, stat))
+    # for stat in sf:
+    #     t2.append(get_stat(season, team_2, stat))
+    #
+    # features.append(t1+t2)
+    # return model.predict_proba(features)
 
 def get_stat(season, team, field):
     try:
