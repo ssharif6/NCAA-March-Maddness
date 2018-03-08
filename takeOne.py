@@ -121,9 +121,7 @@ if __name__ == '__main__':
 
     aggregated_data = pd.concat([season_data, tourney_data])
 
-    bballScorer = make_scorer(calcBracketScore, greater_is_better=True)
-
-    X,Y = mm_predictor.analyze_teams(aggregated_data)
+    X,Y = mm_predictor.analyze_teams_diff(aggregated_data)
 
 
     print("Fitting on " + str(len(X)) + " samples")
@@ -131,6 +129,6 @@ if __name__ == '__main__':
     # TODO Use TPOT or xgboost
     # model = XGBClassifier()
     # model = linear_model.LogisticRegression()
-    tpot = TPOTClassifier(generations = 2, max_time_mins=780, verbosity=2, scoring = bballScorer, population_size=30)
-    #tpot.fit(np.array(X), np.array(Y))
-    #tpot.export('tpot_secondTry_pipeline.py')
+    tpot = TPOTClassifier(generations = 50, max_time_mins=720, verbosity=2, scoring='accuracy', population_size=30)
+    tpot.fit(np.array(X), np.array(Y))
+    tpot.export('tpot_difference_pipeline.py')
