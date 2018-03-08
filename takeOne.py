@@ -129,6 +129,6 @@ if __name__ == '__main__':
     # TODO Use TPOT or xgboost
     # model = XGBClassifier()
     # model = linear_model.LogisticRegression()
-    tpot = TPOTClassifier(generations = 50, max_time_mins=720, verbosity=2, scoring='accuracy', population_size=30)
+    tpot = TPOTClassifier(generations = 50, random_state=42, max_time_mins=600, verbosity=2, population_size=30)
     tpot.fit(np.array(X), np.array(Y))
-    tpot.export('tpot_difference_pipeline.py')
+    tpot.export('tpot_orig_pipeline.py')

@@ -203,7 +203,7 @@ def analyze_teams_diff(agg_data):
             stat_features.append(row.values.tolist())
             y.append(0)
         else:
-            stat_features.append(row.multiply(-1,axis=0).values.tolist())
+            stat_features.append(row.values.tolist())
             y.append(1)
 
     return stat_features, y
